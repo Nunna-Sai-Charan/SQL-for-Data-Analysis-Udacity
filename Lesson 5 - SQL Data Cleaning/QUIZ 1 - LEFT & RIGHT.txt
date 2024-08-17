@@ -1,0 +1,74 @@
+LEFT & RIGHT Quizzes
+
+1) In the accounts table, there is a column holding the website for each company. The last three digits specify 
+what type of web address they are using. A list of extensions (and pricing) is provided here(opens in a new tab).
+ Pull these extensions and provide how many of each website type exist in the accounts table.
+
+Query :
+
+SELECT RIGHT(website, 3) AS domain, COUNT(*) AS no_of_accounts 
+FROM accounts
+GROUP BY 1
+ORDER BY 2 DESC;
+
+2) There is much debate about how much the name (or even the first letter of a company name)(opens in a new 
+tab) matters. Use the accounts table to pull the first letter of each company name to see the distribution of 
+company names that begin with each letter (or number).
+
+Query :
+
+SELECT LEFT(UPPER(name), 1) as first_letter, COUNT(*) as no_of_companies 
+FROM accounts
+GROUP BY 1
+ORDER BY 2 DESC;
+
+3) Use the accounts table and a CASE statement to create two groups: one group of company names that start 
+with a number and a second group of those company names that start with a letter. What proportion of 
+company names start with a letter?
+
+Query :
+
+WITH t1 AS (SELECT UPPER(name), 
+	CASE 	
+		WHEN LEFT(UPPER(name), 1) in ('0','1','2','3','4','5','6','7','8','9') THEN 'number'
+		ELSE 'letter'
+	END as starts_with
+	FROM accounts  ),
+
+t2 AS (SELECT COUNT(*) as no_of_accounts 
+	FROM t1 WHERE starts_with = 'letter'  )
+
+SELECT   (SELECT * FROM t2) AS starts_with_letter, 
+	(SELECT COUNT(*) FROM t1)  AS total_accounts;
+
+
+There are 350 company names that start with a letter and 1 that starts with a number. This gives a ratio of 
+350/351 that are company names that start with a letter or 99.7%.
+
+4) Consider vowels as a, e, i, o, and u. What proportion of company names start with a vowel, and what percent 
+start with anything else?
+
+Query :
+
+WITH t1 AS (SELECT name, 
+	CASE 
+		WHEN LEFT(LOWER(name), 1) in ('a', 'e', 'i', 'o', 'u') THEN 'vowel'
+		ELSE 'not_a_vowel'
+	END AS starts_with
+	FROM accounts),
+
+	t2 AS (SELECT COUNT(*) as vowel_count 
+		FROM t1 
+		WHERE starts_with = 'vowel'), 
+
+	t3 AS (SELECT COUNT(*) as not_a_vowel_count 
+		FROM t1 
+		WHERE starts_with = 'not_a_vowel')
+
+SELECT 	(SELECT * FROM t2) as VOWELS, 
+	(SELECT * FROM t3) as NOT_A_VOWEL, 
+	(SELECT COUNT(*) FROM t1) AS total_accounts;
+
+
+There are 80 company names that start with a vowel and 271 that start with other characters. Therefore 
+80/351 are vowels or 22.8%. Therefore, 77.2% of company names do not start with vowels.

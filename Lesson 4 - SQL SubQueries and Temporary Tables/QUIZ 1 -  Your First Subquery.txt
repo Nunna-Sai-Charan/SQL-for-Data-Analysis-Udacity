@@ -1,0 +1,37 @@
+Quiz 1
+
+1) On which day-channel pair did the most events occur. (Mark all that are true)
+
+Query :
+
+SELECT DATE_TRUNC('day', occurred_at) AS date,
+       channel, 
+       COUNT(*) AS events_count
+FROM web_events
+GROUP BY date, channel
+ORDER BY events_count DESC;
+
+Quiz 2
+
+1) Mark all of the below that are true regarding writing your subquery.
+
+Correct Options : A, C, D
+
+A) The original Query goes in the FROM statement.
+C) An ' * ' is used in the SELECT statement to pull all of the data from the original query.
+D) You MUST use an alias for the table you nest within the outer query.
+
+2) Match each channel to its corresponding average number of events per day.
+
+Query :
+
+SELECT channel, ROUND(AVG(events_count), 2) AS average_events_count 
+FROM
+(SELECT DATE_TRUNC('day', occurred_at) AS date,
+       channel, 
+       COUNT(*) AS events_count
+FROM web_events
+GROUP BY date, channel) sub
+
+GROUP BY channel
+ORDER BY average_events_count DESC;

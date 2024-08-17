@@ -1,0 +1,60 @@
+Quizzes CONCAT
+
+1) Each company in the accounts table wants to create an email address for each primary_poc. The email 
+address should be the first name of the primary_poc . last name primary_poc @ company name .com.
+
+Query :
+
+WITH t1 AS (SELECT name, 
+		primary_poc,
+		LEFT(primary_poc, STRPOS(primary_poc, ' ')-1) as First_name, 
+		RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) as Last_name
+	FROM accounts)
+
+SELECT First_name, 
+	Last_name, 
+	CONCAT(First_name, '.', Last_name, '@', name, '.com') 
+FROM t1;
+
+2)You may have noticed that in the previous solution some of the company names include spaces, which will 
+certainly not work in an email address. See if you can create an email address that will work by removing all 
+of the spaces in the account name, but otherwise your solution should be just as in question 1.
+
+Query :
+
+WITH t1 AS (SELECT name, 
+		primary_poc,
+		LEFT(primary_poc, STRPOS(primary_poc, ' ')-1) as First_name, 
+		RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) as Last_name
+	FROM accounts)
+
+SELECT First_name, 
+	Last_name, 
+	CONCAT(First_name, '.', Last_name, '@', REPLACE(name, ' ', ''), '.com') 
+FROM t1;
+
+
+3) We would also like to create an initial password, which they will change after their first log in. The first 
+password will be the first letter of the primary_poc's first name (lowercase), then the last letter of their first 
+name (lowercase), the first letter of their last name (lowercase), the last letter of their last name (lowercase), 
+the number of letters in their first name, the number of letters in their last name, and then the name of the 
+company they are working with, all capitalized with no spaces.
+
+Query :
+
+WITH t1 AS (SELECT name, 
+		primary_poc,
+		LEFT(primary_poc, STRPOS(primary_poc, ' ')-1) as First_name, 
+		RIGHT(primary_poc, LENGTH(primary_poc) - STRPOS(primary_poc, ' ')) as Last_name
+	FROM accounts)
+
+SELECT  *, 
+CONCAT(LOWER(LEFT(First_name, 1)), 
+	LOWER(RIGHT(First_name, 1)), 
+	LOWER(LEFT(Last_name, 1)), 
+	LOWER(RIGHT(Last_name, 1)), 
+	LENGTH(First_name), 
+	LENGTH(Last_name), 
+	UPPER(REPLACE(name, ' ', ''))
+	) as initial_password 
+FROM t1;

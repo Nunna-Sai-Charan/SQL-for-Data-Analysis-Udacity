@@ -1,0 +1,38 @@
+Quiz Question
+
+Match the appropriate definition or description to each term or column.
+
+1. Has a unique value for every row in that column. There is one in every table.
+
+ans) Primary Key
+
+2. The link to the primary key that exists in another table.
+
+ans) Foreign Key
+
+3. The primary key in every table of our example database.
+
+ans) id
+
+4. A foreign key that exists in both the web_events and orders tables.
+
+ans) account_id
+
+5. The ON statement associated with a JOIN of the web_events and accounts tables.
+
+ans) ON web_events.account_id = accounts.id
+
+
+Quiz Question
+
+1. Select all that are true for primary keys
+
+ans)	There is one and only one of these columns in every table.
+	They are a column in a table.
+
+Quiz Question
+
+1. Select all that are true of foreign keys.
+
+ans) 	They are always linked to a primary key
+	In the above database, every foreign key is associated with the crow-foot notation, which suggests it can appear multiple times in the column of a table.

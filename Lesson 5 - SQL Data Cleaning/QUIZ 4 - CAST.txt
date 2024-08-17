@@ -1,0 +1,33 @@
+1) Write a query to look at the top 10 rows to understand the columns and the raw data in the dataset called 
+sf_crime_data.
+
+Query :
+
+SELECT * 
+FROM sf_crime_data
+LIMIT 10;
+
+2) Remembering back to the lesson on dates, use the QUIZ question below to make sure you remember the format that dates should use in SQL.  
+
+ans) YYYY - MM -- DD
+
+3) Look at the date column in the sf_crime_data table. Notice the date is not in the correct format. 
+
+noticed.
+
+4) Write a query to change the data into the correct SQL date fornat. You will need to use atleast SUBSTR and 
+CONCAT to perform this operation.  
+
+Query :
+
+SELECT    date, 
+	(SUBSTR(date, 7, 4) || '-' || SUBSTR(date, 1, 2) || '-' || SUBSTR(date, 4,2)) as formatted_date 
+FROM sf_crime_data LIMIT 10;
+
+5) Once you have created a column in the correct format, use either CAST or :: to convert this to a date.
+
+Query :
+
+SELECT    date, 
+	(SUBSTR(date, 7, 4) || '-' || SUBSTR(date, 1, 2) || '-' || SUBSTR(date, 4,2))::DATE as formatted_date 
+FROM sf_crime_data LIMIT 10;

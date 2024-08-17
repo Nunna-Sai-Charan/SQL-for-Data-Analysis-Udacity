@@ -1,0 +1,63 @@
+Quiz Question
+
+Select all of the below that are true.
+ans ) All the options are correct
+
+
+Quiz Question
+
+Match each statement to the item it describes.
+
+1. The primary key of the Country table.
+
+ans) Country.countryid
+
+2. The primary key of the State table.
+
+ans) State.stateid
+
+3. The foreign key that would be used in JOINing the tables.
+
+ans) State.countryid
+
+
+Quiz Question
+
+Match the results of the query to the description.
+
+1. The number of columns in resulting table.
+
+ans) 3
+
+2. The number of rows in the resulting table.
+
+ans) 6
+
+4. The number of times countryid 1 will show up in resulting table.
+
+ans) 2
+
+5. The number of times countryid 6 will show up in the resulting table.
+
+ans) 0
+
+
+Quiz Question
+
+Match the results of the query to the description.
+
+1. The number of columns in resulting table.
+
+ans) 3
+
+2. The number of rows in the resulting table.
+
+ans) 8
+
+3. The number of times countryid 1 will show up in resulting table.
+
+ans) 2
+
+4. The number of times countryid 6 will show up in the resulting table.
+
+ans) 1

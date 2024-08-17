@@ -1,0 +1,6 @@
+Quiz Question
+
+Practice
+Use the image above to assist you. If we wanted to join the sales_reps and region tables together, how would you do it.
+
+ans) ON Sales_reps.id=region_id

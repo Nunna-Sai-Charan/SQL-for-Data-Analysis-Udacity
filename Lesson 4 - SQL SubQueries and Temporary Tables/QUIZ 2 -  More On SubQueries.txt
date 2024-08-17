@@ -1,0 +1,56 @@
+Quiz Question
+
+What was the month/year combo for the first order placed?
+
+Query :
+
+SELECT DATE_TRUNC('month', MIN(occurred_at)) as min_order_month 
+FROM Orders;
+
+2) Match each value to the corresponding description.
+
+These are the correct matches.
+
+a) The average amount of standard paper sold on the first month that any order was placed in the orders table (in terms of quantity).
+
+268
+
+Query :
+
+SELECT AVG(standard_qty) as average_standard_paper
+FROM Orders
+WHERE DATE_TRUNC('month', occurred_at) = 
+(SELECT DATE_TRUNC('month', MIN(occurred_at)) as min_order_month FROM Orders);
+
+b) The average amount of gloss paper sold on the first month that any order was placed in the orders table (in terms of quantity).
+
+209
+
+Query :
+
+SELECT AVG(gloss_qty) as average_gloss_paper
+FROM Orders
+WHERE DATE_TRUNC('month', occurred_at) = 
+(SELECT DATE_TRUNC('month', MIN(occurred_at)) as min_order_month FROM Orders);
+
+c) The average amount of poster paper sold on the first month that any order was placed in the orders table (in terms of quantity).
+
+112
+
+Query :
+
+SELECT AVG(poster_qty) as average_poster_paper
+FROM Orders
+WHERE DATE_TRUNC('month', occurred_at) = 
+(SELECT DATE_TRUNC('month', MIN(occurred_at)) as min_order_month FROM Orders);
+
+d) The total amount spent on all orders on the first month that any order was placed in the orders table (in terms of usd).
+
+377331
+
+Query :
+
+SELECT SUM(total_amt_usd) AS total_sales
+FROM Orders
+WHERE DATE_TRUNC('month', occurred_at) = 
+(SELECT DATE_TRUNC('month', MIN(occurred_at)) as min_order_month FROM Orders);

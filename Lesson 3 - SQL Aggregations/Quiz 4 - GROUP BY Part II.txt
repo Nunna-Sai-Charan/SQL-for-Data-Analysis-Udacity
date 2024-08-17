@@ -1,0 +1,55 @@
+Questions: GROUP BY Part II
+
+Use the SQL environment below to assist with answering the following questions. Whether you get stuck or 
+you just want to double check your solutions, my answers can be found at the top of the next concept.
+
+1. For each account, determine the average amount of each type of paper they purchased across their orders. 
+Your result should have four columns - one for the account name and one for the average quantity purchased 
+for each of the paper types for each account.
+
+Query :
+
+SELECT a.name AS account_name, AVG(o.standard_qty) AS standard, AVG(o.gloss_qty) AS gloss, AVG(o.poster_qty) AS poster
+FROM orders o
+JOIN accounts a
+ON a.id=o.account_id
+GROUP BY account_name;
+
+
+2. For each account, determine the average amount spent per order on each paper type. Your result should 
+have four columns - one for the account name and one for the average amount spent on each paper type.
+
+Query :
+
+SELECT a.name AS account_name, AVG(o.standard_amt_usd) AS standard, AVG(o.gloss_amt_usd) AS gloss, AVG(o.poster_amt_usd) AS poster
+FROM orders o
+JOIN accounts a
+ON a.id=o.account_id
+GROUP BY account_name;
+
+3. Determine the number of times a particular channel was used in the web_events table for each sales rep. 
+Your final table should have three columns - the name of the sales rep, the channel, and the number of 
+occurrences. Order your table with the highest number of occurrences first.
+
+Query :
+
+SELECT s.name as Name, w.channel as Channel, COUNT(*) as occurrences
+FROM web_events w
+JOIN accounts a ON a.id=w.account_id
+JOIN sales_reps s ON s.id=a.sales_rep_id
+GROUP BY s.name, Channel
+ORDER BY occurrences DESC;
+
+4. Determine the number of times a particular channel was used in the web_events table for each region. Your 
+final table should have three columns - the region name, the channel, and the number of occurrences. Order 
+your table with the highest number of occurrences first.
+
+Query :
+
+SELECT r.name as region, w.channel as Channel, COUNT(*) as occurrences
+FROM web_events w
+JOIN accounts a ON a.id=w.account_id
+JOIN sales_reps s ON s.id=a.sales_rep_id
+JOIN region r ON r.id=s.region_id
+GROUP BY r.name, Channel
+ORDER BY occurrences DESC;

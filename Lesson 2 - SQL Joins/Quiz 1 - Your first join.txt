@@ -1,0 +1,19 @@
+Quiz Questions
+1. Try pulling all the data from the accounts table, and all the data from the orders table.
+
+Query :
+
+SELECT o.*, a.* 
+FROM accounts a
+JOIN orders o
+ON a.id=o.account_id;
+
+2. Try pulling standard_qty, gloss_qty, and poster_qty from the orders table, and the website and the primary_poc from the accounts table.
+
+Query :
+
+SELECT o.standard_qty, o.gloss_qty, o.poster_qty, a.website, a.primary_poc
+FROM orders o
+JOIN accounts a
+ON a.id=o.account_id;
+ 
